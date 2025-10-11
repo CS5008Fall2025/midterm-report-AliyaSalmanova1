@@ -2,14 +2,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int* fibonacciIterative(int n){
+int fibonacciIterative(int* array, int n){
     //set up prev, curr, and malloc array of size n
-    int prev = 1;
-    int curr = 0;
-    int* array = (int *)malloc(n * sizeof(int));
+    int prev = 0;
+    int curr = 1;
 
     //loop to n
-    for (int i = 0; i < n; i++){
+    for (int i = 0; i <= n + 1; i++){
         //assign curr to array[i]
         array[i] = curr;
         //curr becomes prev + curr, prev becomes old curr which is now array[i]
@@ -18,14 +17,55 @@ int* fibonacciIterative(int n){
     }
 
     //should return array
-    return array;
+    return array[n];
+}
+
+
+
+int fibonacciRecursive(int* array, int n){
+    
+    //base case
+    if (n <= 1) {
+        array[n] = 1;
+        return 1;
+    }
+        
+    //find prev 2 values through recursive calls and add them. assign that to array[n] 
+    //we need a return as function returns an int
+    return array[n] = fibonacciRecursive(array, n - 2) 
+            + fibonacciRecursive(array, n - 1);
+
+}
+
+
+int fibonacciRecursiveDynamic(int* array, int n){
+    
+
+    //base case
+    if (n <= 1) {
+        array[n] = 1;
+        return 1;
+    } 
+    //dynamic programming: if array[n] is not zero, it has already been calculated so return value
+    else if (array[n] != 0){
+        return array[n];
+    }
+    
+    //find prev 2 values through recursive calls and add them. assign that to array[n] 
+    //we need a return as function returns an int
+    return array[n] = fibonacciRecursiveDynamic(array, n - 2) 
+            + fibonacciRecursiveDynamic(array, n - 1);
+
 }
 
 int main(int argc, char** argv){
     //convert 2nd argv (char *) to int
     int n = atoi(argv[1]);
+    int* array = (int *)calloc(n, sizeof(int));
 
-    int* array = fibonacciIterative(n);
+
+    int result = fibonacciIterative(array, n - 1);
+    printf("Result: %d\n", result);
     for (int i = 0; i < n; i++){
         printf("%d ", array[i]);
     }
