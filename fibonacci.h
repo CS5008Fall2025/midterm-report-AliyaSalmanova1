@@ -1,6 +1,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include "helper.h"
 
 int fibonacciIterative(int* array, int n){
     //set up prev, curr, and malloc array of size n
@@ -57,7 +58,7 @@ int fibonacciRecursiveDynamic(int* array, int n){
             + fibonacciRecursiveDynamic(array, n - 1);
 
 }
-
+/*
 int main(int argc, char** argv){
     //convert 2nd argv (char *) to int
     int n = atoi(argv[1]);
@@ -66,10 +67,8 @@ int main(int argc, char** argv){
 
     int result = fibonacciIterative(array, n - 1);
     printf("Result: %d\n", result);
-    for (int i = 0; i < n; i++){
-        printf("%d ", array[i]);
-    }
+    printIntArray(array, n);
 
     //free! 
     free(array);
-}
+}*/
