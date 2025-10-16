@@ -10,7 +10,7 @@ public class Helper {
     public static String time_function(FibonacciApproach fibonacci, int n, int print){
         //get start time, run function, get end time
         long startTime = System.nanoTime();
-        int result = fibonacci.fibonacci(n);
+        long result = fibonacci.fibonacci(n);
         long endTime = System.nanoTime();
         
         //subtract times, and divide by 1000000 to get milliseconds from nanoseconds

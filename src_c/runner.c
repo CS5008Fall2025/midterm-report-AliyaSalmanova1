@@ -41,7 +41,7 @@ int main(int argc, char** argv){
     FILE *fileAops;	
     fileAops = fopen("ops.csv", "a");
 
-    for (int n = 3; n <= size; n++){
+    for (int n = 0; n <= size; n++){
 	
 		//convert n to a string and print it into csv files
     	char nString[100];

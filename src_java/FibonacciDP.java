@@ -1,21 +1,23 @@
 public class FibonacciDP implements FibonacciApproach{
     public int ops;
-    public int[] dpArray;
+    public long[] dpArray;
 
     FibonacciDP(int n){
 
-        this.dpArray = new int[n + 1];
+        this.dpArray = new long[n + 1];
+
+        if (n >= 0) dpArray[0] = 0L;
+        if (n >= 1) dpArray[1] = 1L;
         ops = 0;
     }
 
-    public int fibonacci(int n){
+    public long fibonacci(int n){
 
         //base cases
-        if (n == 0) return 0;
-        if (n == 1) return 1;
+        if (n == 0) return this.dpArray[0];
         
         //dynamic programming: if array[n] is not zero, it has already been calculated so return value
-        else if (this.dpArray[n] != 0){
+        else if (this.dpArray[n] != 0L){
             return this.dpArray[n];
         }
 

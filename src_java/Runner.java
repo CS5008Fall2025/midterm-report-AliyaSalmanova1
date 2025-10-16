@@ -7,8 +7,8 @@ import java.util.Scanner;
 public class Runner {
 
     //names of csv files
-    static String timesCsvFile = "times.csv";
-    static String opsCsvFile = "ops.csv";
+    static String timesCsvFile = "src_java/times_java.csv";
+    static String opsCsvFile = "src_java/ops_java.csv";
 
     static void initiateFile(String nameOfFile){
         //try to open file, write names of columns into it, then close
@@ -55,7 +55,7 @@ public class Runner {
             FileWriter opsFileWriter =  new FileWriter(opsCsvFile, true);
 
             //loop to N
-            for (int n = 3; n < N; n++){
+            for (int n = 0; n <= N; n++){
                 //append n into file with ,. will have to convert n to int
                 opsFileWriter.write(Integer.toString(n) + ",");
                 timesFileWriter.write(Integer.toString(n) + ",");

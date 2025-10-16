@@ -8,17 +8,17 @@ public class FibonacciIterative implements FibonacciApproach{
     FibonacciIterative(){
         ops = 0;
     }
-    public int fibonacci(int n){
+    public long fibonacci(int n){
         //set up prev and curr
-        int prev = 0;
-        int curr = 1;
+        long prev = 0L;
+        long curr = 1L;
 
         //loop to n
         for (int i = 0; i < n; i++){
 
             this.ops++;
             //curr becomes curr + prev, and prev becomes old curr
-            int temp = prev + curr;
+            long temp = prev + curr;
             prev = curr;
             curr = temp;
         }

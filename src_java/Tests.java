@@ -26,7 +26,7 @@ public class Tests {
     public void testRecursive(){
         assertEquals(0, fibRecursive.fibonacci(0));
         assertEquals(1, fibRecursive.fibonacci(1));
-        //assertEquals(832040, fibRecursive.fibonacci(30));
+        assertEquals(832040, fibRecursive.fibonacci(30));
     }
 
     @Test
