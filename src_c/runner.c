@@ -24,7 +24,7 @@ int main(int argc, char** argv){
     }
 
 	//initiate array of functions
-    int (*funcArray[])(int n, int* ops) = {fibonacciIterative, fibonacciRecursive, fibonacciRecursiveDynamic};
+    uint64_t (*funcArray[])(uint64_t n, int* ops) = {fibonacciIterative, fibonacciRecursive, fibonacciRecursiveDynamic};
     
 	//convert inputted n number from string to int
     int size = atoi(argv[1]);
@@ -51,7 +51,6 @@ int main(int argc, char** argv){
 		
 		//loops through array of functions
         for (int i = 0; i < 3; i++){
-			
 	
 			int ops = 0;
 			
@@ -62,7 +61,7 @@ int main(int argc, char** argv){
 				
 			}else {
 				//run function and get time taken
-				double time_taken = time_function(funcArray[i], n, 0, &ops);
+				double time_taken = time_function(funcArray[i], (uint64_t)n, 0, &ops);
 
 				//convert time taken to a string and print into csv files
             	char timeString[100];

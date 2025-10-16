@@ -18,15 +18,19 @@ static inline double ms_between(const struct timespec* a, const struct timespec*
            (b->tv_nsec - a->tv_nsec) / 1e6;
 }
 
-double time_function(int (*func)(int, int*), int n, int print, int* ops) {
+double time_function(uint64_t (*func)(uint64_t, int*), int n, int print, int* ops) {
 
 	//declare two structs, one for initial time, one for end time
     struct timespec t0, t1;
     
     //get initial time, run function, get time after running function
     clock_gettime(CLOCK_MONOTONIC, &t0);
-    func(n - 1, ops);
+    uint64_t result = func(n, ops);
     clock_gettime(CLOCK_MONOTONIC, &t1);
+
+    if (print == 1){
+        printf("Nth fibonacci is: %llu\n", result);
+    }
 
     //calculate difference and return in desired format
     return ms_between(&t0, &t1);

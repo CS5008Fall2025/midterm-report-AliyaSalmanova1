@@ -3,70 +3,57 @@
 #include <stdlib.h>
 #include "fibonacci.h"
 
-int testFibIterative(){
-    int n = 10;
-    int* array = (int *)calloc(n, sizeof(int));
+//note: I factored the code this way to avoid duplicating a lot of code
 
-    int result = fibonacciIterative(array, n - 1);
-    int expectedResult = 55;
+//take in fib function, n, expected, and ops
+int testFib(uint64_t (*func)(uint64_t, int* ), uint64_t n, uint64_t expected, int ops){
 
-    if (expectedResult != result) return 1;
-
-    int expectedArray[10] = {1, 1, 2, 3, 5, 8, 13, 21, 34, 55};
-    for (int i = 0; i < 10; i++){
-        if (array[i] != expectedArray[i]) return 1;
-    }
+    //find result of calling function, passing in n and ops
+    uint64_t result = func(n, &ops);
+    
+    //check if result is accurate or not
+    if (result != expected) return 1;
     return 0;
 }
 
-int testfibonacciRecursive(){
-    int n = 10;
-    int* array = (int *)calloc(n, sizeof(int));
-
-    int result = fibonacciRecursive(array, n - 1);
-    int expectedResult = 55;
-
-    if (expectedResult != result) return 1;
-
-    int expectedArray[10] = {1, 1, 2, 3, 5, 8, 13, 21, 34, 55};
-    for (int i = 0; i < 10; i++){
-        if (array[i] != expectedArray[i]) return 1;
-    }
-    return 0;
-}
-
-int testfibonacciDynamic(){
-    int n = 10;
-    int* array = (int *)calloc(n, sizeof(int));
-
-    int result = fibonacciRecursiveDynamic(array, n - 1);
-    int expectedResult = 55;
-
-    if (expectedResult != result) return 1;
-
-    int expectedArray[10] = {1, 1, 2, 3, 5, 8, 13, 21, 34, 55};
-    for (int i = 0; i < 10; i++){
-        if (array[i] != expectedArray[i]) return 1;
-    }
-    return 0;
-}
 
 int main(){
-    if (testFibIterative() == 1){
-        printf("testFibIterative test failed\n");
-    }else {
-        printf("testFibIterative test passed\n");
-    }
 
-    if (testfibonacciRecursive() == 1){
-        printf("testfibonacciRecursive test failed\n");
-    }else {
-        printf("testfibonacciRecursive test passed\n");
-    }
+    //make array of ns and matching expected results for each element
+    enum { amountOfNs = 3 };
+    int arrayOfNs[amountOfNs] = {0, 1, 30};
+    int expectedResults[amountOfNs] = {0, 1, 832040};
 
-    if (testfibonacciDynamic() == 1){
-        printf("testfibonacciDynamic test failed");
-    }else {
-        printf("testfibonacciDynamic test passed\n");
+
+    //array of fibonacci function definitions for all approaches
+    uint64_t (*funcArray[])(uint64_t n, int* ops) = {fibonacciIterative, fibonacciRecursive, fibonacciRecursiveDynamic};
+    
+    //names of fibonacci function definitions for all approaches
+    char* namesOfFunctions[3] = {"fibonacci iterative", "fibonacci recursive", "fibonacci recursive w DP"};
+
+    //loop through array of functions
+    for (int i = 0; i < 3; i++){
+        
+        //loop through array of ns
+        for (int j = 0; j < amountOfNs; j++){
+    
+            //find current n and convert to unsigned long int. do same for expected result
+            uint64_t currN = (uint64_t)(arrayOfNs[j]);
+            uint64_t expectedResult = (uint64_t)(expectedResults[j]);
+
+            int ops = 0;
+            //call testFib, passing in current function, curr n, expected result, ops and save result
+            int pass_fail = testFib(funcArray[i], currN, expectedResult, ops);
+
+            //print if test passed or failed
+            if (pass_fail == 1){
+                printf("Failed test for %llu with %s\n", currN, namesOfFunctions[i]);
+            }else {
+                printf("Passed test for %llu with %s\n", currN, namesOfFunctions[i]);
+            }
+
+        }
     }
 }
+
+

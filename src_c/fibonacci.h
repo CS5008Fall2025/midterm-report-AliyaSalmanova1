@@ -3,17 +3,20 @@
 #include <stdlib.h>
 #include "helper.h"
 
-int fibonacciIterative(int n, int* ops){
+uint64_t fibonacciIterative(uint64_t n, int* ops){
+    
+    //edge case
+    if (n <= 1) return n;
     //set up prev and curr
-    int prev = 0;
-    int curr = 1;
+    uint64_t prev = 0;
+    uint64_t curr = 1;
 
     //loop to n
-    for (int i = 0; i <= n; i++){
+    for (int i = 0; i < n; i++){
 
 		(*ops)++;
         //curr becomes curr + prev, and prev becomes old curr
-        int temp = curr + prev;
+        uint64_t temp = curr + prev;
         prev = curr;
         curr = temp;
     }
@@ -23,7 +26,8 @@ int fibonacciIterative(int n, int* ops){
 }
 
 
-int fibonacciRecursive(int n, int* ops){
+
+uint64_t fibonacciRecursive(uint64_t n, int* ops){
     
     //base cases
     if (n == 0) return 0;
@@ -31,13 +35,13 @@ int fibonacciRecursive(int n, int* ops){
         
     //recursive case
     //find prev 2 values through recursive calls and add them
-	(*ops)++;
-    return fibonacciRecursive(n - 2, ops) 
-            + fibonacciRecursive(n - 1, ops);
-
+    (*ops)++;
+    return fibonacciRecursive(n - 1, ops) + fibonacciRecursive(n - 2, ops);
+           
 }
 
-int fibonacciHelperDP(int* array, int n, int* ops){
+uint64_t fibonacciHelperDP(uint64_t* array, uint64_t n, int* ops){
+    
 
     //base cases
     if (n == 0) return 0;
@@ -50,8 +54,7 @@ int fibonacciHelperDP(int* array, int n, int* ops){
 
     //find prev 2 values through recursive calls and add them. assign that to array[n] to save value
     (*ops)++;
-    array[n] = fibonacciHelperDP(array, n - 2, ops) 
-            + fibonacciHelperDP(array, n - 1, ops);
+    array[n] = fibonacciHelperDP(array, n - 1, ops) + fibonacciHelperDP(array, n - 2, ops);
 
     //return nth fib
     return array[n];
@@ -59,13 +62,15 @@ int fibonacciHelperDP(int* array, int n, int* ops){
 }
 
 
-int fibonacciRecursiveDynamic(int n, int* ops){
+uint64_t fibonacciRecursiveDynamic(uint64_t n, int* ops){
+    //edge case
+    if (n <= 1) return n;
 
     //create array of size n filled with 0s
-    int* array = (int *)calloc(n + 1, sizeof(int));
+    uint64_t* array = (uint64_t *)calloc(n + 1, sizeof(uint64_t));
 
     //call helper that returns nth fib
-    int nthFibonacci = fibonacciHelperDP(array, n, ops);
+    uint64_t nthFibonacci = fibonacciHelperDP(array, n, ops);
 
     //free array!
     free(array);

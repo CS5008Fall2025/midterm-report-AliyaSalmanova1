@@ -15,15 +15,18 @@ int main(int argc, char** argv){
         printf("3. Enter 1 to print, and 0 to not print.\n");
         return 1;
     }
-
+    //need this to input into strtoul
+    //char *endptr;
     //args 1 should be n, arg 2 the func that user wants to run, and arg 3 whether to print or not
-    int n = atoi(argv[1]);
+    uint64_t n =  strtoul(argv[1], NULL, 0);
     int chosenFunc = atoi(argv[2]);
     int print = atoi(argv[3]);
 
     //array of fibonacci function definitions for all approaches
-    int (*funcArray[])(int n, int* ops) = {fibonacciIterative, fibonacciRecursive, fibonacciRecursiveDynamic};
+    uint64_t (*funcArray[])(uint64_t n, int* ops) = {fibonacciIterative, fibonacciRecursive, fibonacciRecursiveDynamic};
     
+    //array of fibonacci function definitions for all approaches
+    char* namesOfFunctions[3] = {"Fibonacci iterative", "Fibonacci recursive", "Fibonacci recursive w DP"};
 
     double time_taken;
 
@@ -38,7 +41,7 @@ int main(int argc, char** argv){
 			int ops = 0;
             //run time function passing in current element in funcArray and print out result
             time_taken = time_function(funcArray[i], n, print, &ops);
-            printf("Time taken: %f\n", time_taken);
+            printf("%s for %llu took: %f\n", namesOfFunctions[i], n, time_taken);
     
 
         }
@@ -47,7 +50,7 @@ int main(int argc, char** argv){
 		int ops = 0;
         //run time function passing in current element in funcArray and print out result
         time_taken = time_function(funcArray[chosenFunc - 1], n, print, & ops);
-        printf("Time taken: %f\n", time_taken);
+        printf("%s for %llu took: %f\n", namesOfFunctions[chosenFunc - 1], n, time_taken);
         
     }
 
