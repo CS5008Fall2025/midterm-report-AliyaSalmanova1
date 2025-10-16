@@ -14,7 +14,7 @@ public class FibonacciIterative implements FibonacciApproach{
         int curr = 1;
 
         //loop to n
-        for (int i = 0; i <= n; i++){
+        for (int i = 0; i < n; i++){
 
             this.ops++;
             //curr becomes curr + prev, and prev becomes old curr

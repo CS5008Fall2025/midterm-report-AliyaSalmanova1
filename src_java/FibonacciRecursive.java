@@ -9,8 +9,8 @@ public class FibonacciRecursive implements FibonacciApproach{
     public int fibonacci(int n){
 
         //base cases
-        if (n == 0) return 0;
-        if (n <= 1) return 1;
+        if (n <= 1) return n;
+
 
         this.ops++;
         //recursive case

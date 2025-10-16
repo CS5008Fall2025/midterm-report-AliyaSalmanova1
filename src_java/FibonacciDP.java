@@ -4,7 +4,7 @@ public class FibonacciDP implements FibonacciApproach{
 
     FibonacciDP(int n){
 
-        this.dpArray = new int[n];
+        this.dpArray = new int[n + 1];
         ops = 0;
     }
 

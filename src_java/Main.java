@@ -20,7 +20,7 @@ public class Main {
         while (repeat){
             try{
                 System.out.println("Welcome to our fibonacci assignment! Please enter in these arguments one after the other: \n");
-                System.out.println("1. Number for the size of array.\n");
+                System.out.println("1. Number for N.\n");
                 n = scanner.nextInt();
                 System.out.println("2. The number 1 to run the iterative approach, 2 for recursive, 3 for recursive with dynamic programming, and 4 for all.\n");
                 chosenFunc = scanner.nextInt();
@@ -36,7 +36,7 @@ public class Main {
 
         //initiate all fibonacciApproach objects and place in array
         FibonacciApproach fibonacciIterative = new FibonacciIterative();
-        FibonacciApproach fibonacciRecursive = new FibonacciIterative();
+        FibonacciApproach fibonacciRecursive = new FibonacciRecursive();
         FibonacciApproach fibonacciRecursiveDynamic = new FibonacciDP(n);
 
         FibonacciApproach[] fibonaccis = {fibonacciIterative, fibonacciRecursive, fibonacciRecursiveDynamic};
@@ -49,14 +49,14 @@ public class Main {
             for (int i = 0; i < 3; i++){
                 FibonacciApproach fibonacci = fibonaccis[i];
                 //run time_function passing in current fib function
-                time_taken = Helper.time_function(fibonacci, n, 0);
+                time_taken = Helper.time_function(fibonacci, n, print);
                 System.out.println("Time taken: " + time_taken + "\n");
 
             }
         } else {
             FibonacciApproach fibonacci = fibonaccis[chosenFunc];
             //run time_function passing in fib function
-            time_taken = Helper.time_function(fibonacci, n, 0);
+            time_taken = Helper.time_function(fibonacci, n, print);
             System.out.println("Time taken: " + time_taken + "\n");
 
         }
