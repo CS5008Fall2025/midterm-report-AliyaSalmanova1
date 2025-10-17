@@ -191,10 +191,10 @@ The curve grows like you’d expect from exponential time. Java’s line grows s
 
 
 ### Iterative and Dynamic Programming Versions
-```c```
+
 ![](png_folder/iterative_dp_runtimes_c.png)
 
-```java```
+
 ![](png_folder/iterative_dp_runtimes_java.png)
 
 We can see spikes in the runtimes for the earlier N numbers for our Java implementations.
