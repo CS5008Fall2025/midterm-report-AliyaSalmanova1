@@ -188,7 +188,7 @@ I decided to measure the time in milliseconds instead of seconds to be able to b
 | 40   | 41        | 102334154 | 38                  |
 
 The ops table matches the theory. Recursive operations count looks like Fibonacci numbers (aka at
-n=40 ops = 102,334,154), while iterative and DP are linear.
+n=40 ops is close to 102334155), while iterative and DP are linear.
 
 The results we get also depends on what we count as an operation, meaning where we are incrementing the operations count.
 In the dynamic programming solution, we are not incrementing the operations count when fib(n) is being called for n values
