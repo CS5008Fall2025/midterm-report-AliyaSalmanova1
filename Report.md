@@ -14,7 +14,15 @@ for 0...N to csv files, and I used this data to create line graphs that are in t
 
 ## Overview and Big O Notation
 
-Pseudocode for iterative approach:
+| Fibonacci Algorithm | Iterative | Recursive | Dynamic Programming |
+|---------------------|-----------|----------|---------------------|
+| Time Complexity     | O(n)      | O(2^n)   | O(n)                |
+| Space Complexity    | O(1)      | O(n)     | O(n)                |
+
+
+### Iterative approach
+
+Pseudocode:
 ```
 function fib_iter(n):
     if n <= 1: return n
@@ -34,8 +42,10 @@ In Big O notation, we don't count constants, so we get O(n).
 
 The space complexity is O(1), as no matter how large or small n is, we always declare the same number of variables.
 
+### Recursive approach
 
-Pseudocode for recursive approach:
+Pseudocode:
+
 ```
 function fib_rec(n):
     if n <= 1: return n
@@ -45,28 +55,30 @@ function fib_rec(n):
 Let's look at this using the recurrence tree if n is 4: 
 
 n 
-
-(n-1) (n-2) 
+\
+(n-1) (n-2) \
 (2^1)
-
-(n-2) (n-3) (n-3) (n-4) 
+\
+(n-2) (n-3) (n-3) (n-4) \
 (2^2)
-
-(n-3) 
+\
+(n-3) \
 (2^3)
 
-The T(n) would be on average and worse case is T(n-1) + T(n-2) + O(1). 
+The T(n) for the average and worse case is T(n-1) + T(n-2) + O(1). 
 We ignore constants, so the big O notation is O(2^n), which is exponential growth. 
 
 Our space complexity would be O(n). This is because the space complexity of a recursive algorithm 
 is the space for the data structures used + the depth of the recursion.
-This is because we count how many calls are on the call stack, and the amount of calls on the call
+If we count how many calls are on the call stack, we see that the amount of calls on the call
 stack never goes over n. 
 In the case of n = 4, we would get fib(4), fib(3), fib(2), fib(1) on the call stack.
-After that, fib(1) gets popped off and fib(0) would be placed on the call stack. 
+After that, fib(1) gets popped off and fib(0) gets added. 
 We never go over 4 functions on the call stack. 
 
-Pseudocode for dynamic programming approach: 
+### Dynamic programming approach: 
+
+Pseudocode:
 
 ```
 memo = array of length n+1 filled with 0s
@@ -78,10 +90,10 @@ function fib_memo(n):
 ```
 
 To show what is happening better I will draw out a tree:
-                fib(4)
-            fib(3) fib(2) - returns
-    fib(2) fib(1) - returns
-fib(1) fib(0)
+_______________fib(4) \
+____________fib(3) fib(2) - returns \
+______fib(2) fib(1) - returns \
+fib(1) fib(0) \
 
 Using memoization, we compute each subproblem once. 
 The first time we hit an n, we do O(1) work (a couple checks and an add) and store it. 
@@ -98,7 +110,7 @@ The space complexity would be O(n), as we are declaring an array of size n in or
 I noticed that the iterative solution can be counted as dynamic programming with tabulation, as we are 
 saving the computations of n-1 and n-2 in variables. 
 
-The most efficient approach in terms of time complexity and space complexity theory is the iterative approach, 
+The most efficient approach in terms of time complexity and space complexity in theory is the iterative approach, 
 as it has the same time complexity as the recursive dp solution, but less space complexity. However, we will see that 
 the iterative solution's runtimes grow slightly more than the recursive dynamic programming implementation in Java.
 
@@ -110,16 +122,16 @@ The iterative and dynamic programming solutions ran until n = 3000.
 I printed out the runtimes and ops to CSVs for both languages (src_c/ops.csv, src_c/times.csv, src_java/ops_java.csv, src_java/times.csv)
 and then created line graphs from the data, which can be seen in the png_folder. 
 
-Recursive runtimes (C vs Java): png_folder/recursive_runtimes_c_java.png 
+Recursive runtimes (C vs Java): png_folder/recursive_runtimes_c_java.png \
 The curve grows like you’d expect for exponential time. Java’s line grows a bit faster than C by my runs.
-However, a big contributor to this was the optimization I made during compilation,
+However, a big contributor to this was the optimization I made during compilation for C,
 using gcc -O3 -march=native -fno-omit-frame-pointer. 
 
-Iterative + DP in C: png_folder/iterative_dp_runtimes_c.png
+Iterative + DP in C: png_folder/iterative_dp_runtimes_c.png \
 Both are nice and linear. My iterative version is a bit faster than my DP version in C, 
 due to the calloc the C performs for the DP solution. 
 
-Iterative + DP in Java: png_folder/iterative_dp_runtimes_java.png
+Iterative + DP in Java: png_folder/iterative_dp_runtimes_java.png \
 Also linear. Here my DP was faster than my iterative slightly.
 
 
@@ -179,8 +191,8 @@ The ops table matches the theory. Recursive operations count looks like Fibonacc
 n=40 ops = 102,334,154), while iterative and DP are linear.
 
 The results we get also depends on what we count as an operation, meaning where we are incrementing the operations count.
-In the dynamic programming solution, we are not incrementing the operations count when the function is being called for the n
-where fib of n has already been calculated and just returning a value from our array. If we were, it would count as more operations.
+In the dynamic programming solution, we are not incrementing the operations count when fib(n) is being called for n values
+for which the result has already been calculated and it just returns a value from our array. If we were, it would count as more operations.
 
 
 ### Recursive Versions
@@ -199,7 +211,7 @@ The curve grows like you’d expect from exponential time. Java’s line grows s
 
 We can see spikes in the runtimes for the earlier N numbers for our Java implementations.
 Java first compiles the code into byte-code, then that byte-code is interpreted by the JVM (Java virtual machine).
-However, the JVM also runs just-in-time compilation for optimization. The optimization happens over time,
+However, the JVM also runs just-in-time compilation for optimization (JIT). The optimization happens over time,
 so this is likely why we are getting such results. 
 
 C is fully compiled ahead of time and shows faster runtimes when we use optimization. 
@@ -210,15 +222,17 @@ C is fully compiled ahead of time and shows faster runtimes when we use optimiza
 As we can see in the line graphs, the recursive version in Java is somewhat more costly than the version in C, and in general 
 all the runtimes of the different approaches are more costly than the runtimes in C. 
 
+The runtimes for the dynamic programming solution in C grows quicker than the iterative solution, 
+and the iterative solution grows quicker than the dynamic programming one in Java.
+
 
 ## Language Analysis
 
 ### Language 1: C
 
-Like in the Java implementation, the recursive approach in C proves to be very inefficient in terms of runtime. 
-The C implementation of the dynamic programming approach results in worse runtimes than the iterative approach.
+Like in the Java implementation, the recursive approach in C proves to be very inefficient in terms of runtime.
 The iterative approach's runtimes are surprisingly good. 
-The drawbacks of dynamic in programming in this case is that calloc is a costly function, as it takes time for the program
+The drawbacks of dynamic programming in this case is that calloc is a costly function, as it takes time for the program
 to allocate n amount of memory, and initiate all the elements to 0. The bigger n, the more space the array needs,
 and the longer it takes C to allocate that memory. Another drawback for the dynamic programming approach is that, 
 for n values that have already been calculated, we still need to recursively call the function again,
@@ -227,16 +241,16 @@ and check whether we already have the array[n] value. This takes time and adds o
 
 ### Language 2: Java
 
-For the dynamic programming solution, I was concerned about whether the array would be passed as a copy when used as an argument in the helper function.
-However, since arrays are stored in the heap in Java, what gets copied is the pointer. So, the array can be mutated in place.
+For the dynamic programming solution, at first I did have a helper function just as I did in C. I was concerned about whether the array would be passed as a copy when used as an argument in the helper function.
+However, since arrays are stored in the heap in Java, what gets copied is the pointer. So, the array can be mutated in place. I later refactored as I could just have the array be a property of the FibonacciDP object. 
 
 Java is an object-oriented programming language, so I had to think in terms of classes and create objects. To make it possible 
 to create an array of the different Fibonacci objects, I had to implement a FibonacciApproach interface and have the Fibonacci 
 objects all implement that interface, so that I could later loop through the array of objects and call the fibonacci() method on all of them.
 This had me think in a different way than I do in C coding.
 
-However, the implementation of the algorithm itself is nearly identical in both languages. In the dynamic programming one however,
-I did not need a helper method in java. I implemented the helper method in c so that the fibonacciRecursiveDynamic() method
+However, the implementation of the algorithm itself is nearly identical in both languages. As I've mentioned, in the dynamic programming solution in Java, however,
+I did not end up needing a helper method. I implemented the helper method in c so that the fibonacciRecursiveDynamic() method
 would remain with 2 arguments like the other two approaches, and the helper method could take in the array as an extra argument.
 This was not necessary in Java as I saved the array of n size as a property of the object. 
 
@@ -245,7 +259,7 @@ This was not necessary in Java as I saved the array of n size as a property of t
 
 In general, the languages felt similar for a stand-alone algorithm, not an application. 
 The main difference to me was how I handled memory and pointers directly in C, 
-and in Java I had to use on classes/interfaces. I researched how an array is stored under the hood,
+and in Java I had to use on classes/interfaces. I researched how an array is stored under the hood in Java (in the heap),
 to make sure that the array would be mutated in place in the dynamic programming solution.
 
 Getting the runners to behave the same took as much work as the algorithms themselves - matching prompts, timing units, and CSV outputs. 
@@ -255,20 +269,20 @@ Next time I’d drive both from a single script (probably Python) to generate on
 From the runtimes, I learned more about how the JVM actually executes code. 
 Java compiles to bytecode at first, then the JVM interprets the bytecode, while also
 the JIT-compiles hot methods to native code. 
-C is ahead-of-time fully compiled. That helps explain why my C runtimes were generally faster (with optimization, without optimization it would produce slower results than it did).
+C is ahead-of-time compiled. That helps explain why my C runtimes were generally faster (with optimization, without optimization it would produce slower results than it did).
 
 Also, both languages can zero-initialize arrays (Java by default, and I used calloc in C), so zeroing cost exists in both with different constants.
-One interesting result: in Java my DP run won over iterative; in C my iterative beat DP. That’s consistent with constant-factor differences: 
-the DP version may pay function-call and array-access costs in C, while in Java the JIT can sometimes smooth those. Either way, both are Θ(n).
+An interesting result was how my Java DP run won over iterative; in C my iterative beat DP. That’s consistent with constant-factor differences: 
+the DP version may pay function-call and array-access costs in C, while in Java the JIT can sometimes smooth those. Either way, both are O(n) runtime.
 
-These comparisons are nuanced and can change with different optimizations. 
+I think these comparisons are nuanced and can change with different optimizations. 
 Sometimes one language clearly wins, other times the comparisons are close and the reasons one is faster is a mix of runtime behavior and what is used to compile the program.
 
 
 ## Conclusions / Reflection
 
-The naive recursion solution (without dynamic programming) is elegant but exponential time becomes impractical fast. 
-For real-use I’d choose iterative or bottom-up DP, which are both Θ(n) runtime, and with the two-variable version they are O(1) extra space.
+The naive recursion solution (without dynamic programming) looks elegant but exponential time becomes impractical quickly. 
+For real-use I’d most likely choose iterative or DP, depending on the language.
 
 The data matched theory - exponential growth for recursion and linear for iterative/DP. 
 C was faster in my measurements (after O3 -march=native), while Java improved after JVM warm-up.
@@ -276,8 +290,8 @@ C was faster in my measurements (after O3 -march=native), while Java improved af
 If I were to redo this, I’d drive both languages from one runner, as that ensures that the timings are being calculated the same way
 and enables more accurate results. 
 
-As a side effect of this assignment, I also learned a few other things, about nanoseconds, what 1e6/1e9 means, and how “ops” definitions affect the charts. 
-Also, I initially gave each function two jobs (fill array and return fib of n), but keeping a function focused on one purpose makes timing cleaner and I refactored.
+As a side effect of this assignment, I also learned a few other things, such as what nanoseconds are, what 1e6/1e9 means, and more details about how different languages are compiled and interpreted. 
+Also, I initially gave each function two jobs (fill array and return fib of n), but having a function focused on one purpose makes timing cleaner and I refactored.
 
 ## References
 
