@@ -304,9 +304,9 @@ C was faster in my measurements (after O3 -march=native), while Java improved af
 
 If I were to redo this, I’d drive both languages from one runner, as that ensures that the timings are being calculated the same way
 and enables more accurate results. If I had more time, I would also have made sure that the code in runner.c and main.c,
-accounted for all invalid user inputs. I accounted for some, but if the user inputs a number higher than 4 or less than 1
+accounted for more invalid user inputs. I accounted for some, but if the user inputs a number higher than 4 or less than 1
 for which approach they choose, the program would have a runtime error.
-I also would go back and perhaps look-up more ways this algorithm could be solved.
+I also would go back and perhaps look-up more niche ways this algorithm could be solved.
 I wrote the code all myself without sources at first, as I believed this was best for my practice and thinking skills.
 
 As a side effect of this assignment, I also learned a few other things, such as what nanoseconds are, what 1e6/1e9 means, and more details about how different languages are compiled and interpreted.
