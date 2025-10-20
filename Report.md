@@ -139,6 +139,9 @@ I wrote separate Runner code in C and Java to print out the data to the csv file
 so it was important to make sure that the time would be measured in the same units, or else our data and comparisons would be incorrect.
 In java I used the System.nanoTime() functions, and in C I used clock_gettime. I made sure both were measured in milliseconds.
 I decided to measure the time in milliseconds instead of seconds to be able to better see the curves/lines and the differences between times.
+I think a potential limitation of this analysis is that the built-in time functions for the two languages
+could take some time to run themselves, and one of them could be slightly slower or faster than the other. That could potentially
+alter our results by a small amount. I mention a potential solution for this in a later section.
 
 
 
