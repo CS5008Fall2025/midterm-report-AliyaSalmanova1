@@ -24,7 +24,7 @@ for 0...N to csv files, and I used this data to create line graphs that are in t
 
 Pseudocode:
 ```
-function fib_iter(n):
+function fib(n):
     if n <= 1: return n
     prev = 0
     curr = 1
@@ -47,9 +47,9 @@ The space complexity is O(1), as no matter how large or small n is, we always de
 Pseudocode:
 
 ```
-function fib_rec(n):
+function fib(n):
     if n <= 1: return n
-    return fib_rec(n-1) + fib_rec(n-2)
+    return fib(n-1) + fib(n-2)
 ```
 
 Let's look at this using the recurrence tree if n is 4:
@@ -81,12 +81,12 @@ We never go over 4 functions on the call stack.
 Pseudocode:
 
 ```
-memo = array of length n+1 filled with 0s
-function fib_memo(n):
+cache = array of length n+1 filled with 0s
+function fib(n):
     if n <= 1: return n
-    if memo[n] != 0: return memo[n]
-    memo[n] = fib_memo(n-1) + fib_memo(n-2)
-    return memo[n]
+    if cache[n] != 0: return cache[n]
+    cache[n] = fib(n-1) + fib(n-2)
+    return cache[n]
 ```
 
 To show what is happening better I will draw out a tree:
@@ -304,7 +304,7 @@ and enables more accurate results. If I had more time, I would also have made su
 accounted for all invalid user inputs. I accounted for some, but if the user inputs a number higher than 4 or less than 1
 for which approach they choose, the program would have a runtime error.
 I also would go back and perhaps look-up more ways this algorithm could be solved.
-I wrote the code all myself, as I believed this was best for my practice and thinking skills.
+I wrote the code all myself without sources at first, as I believed this was best for my practice and thinking skills.
 
 As a side effect of this assignment, I also learned a few other things, such as what nanoseconds are, what 1e6/1e9 means, and more details about how different languages are compiled and interpreted.
 A note I would like to add is that I initially gave each function two jobs (fill array and return fib of n), but having a function focused on one purpose makes timing cleaner and I refactored.
