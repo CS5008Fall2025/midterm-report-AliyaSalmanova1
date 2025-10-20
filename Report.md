@@ -145,50 +145,57 @@ I decided to measure the time in milliseconds instead of seconds to be able to b
 ### Operations Comparison
 
 #### Operations Count
-
-| N    | Iterative | Recursive | Dynamic Programming |
-|------|-----------|-----------|---------------------|
-| 3    | 4         | 1         | 1                   |
-| 4    | 5         | 2         | 2                   |
-| 5    | 6         | 4         | 3                   |
-| 6    | 7         | 7         | 4                   |
-| 7    | 8         | 12        | 5                   |
-| 8    | 9         | 20        | 6                   |
-| 9    | 10        | 33        | 7                   |
-| 10   | 11        | 54        | 8                   |
-| 11   | 12        | 88        | 9                   |
-| 12   | 13        | 143       | 10                  |
-| 13   | 14        | 232       | 11                  |
-| 14   | 15        | 376       | 12                  |
-| 15   | 16        | 609       | 13                  |
-| 16   | 17        | 986       | 14                  |
-| 17   | 18        | 1596      | 15                  |
-| 18   | 19        | 2583      | 16                  |
-| 19   | 20        | 4180      | 17                  |
-| 20   | 21        | 6764      | 18                  |
-| 21   | 22        | 10945     | 19                  |
-| 22   | 23        | 17710     | 20                  |
-| 23   | 24        | 28656     | 21                  |
-| 24   | 25        | 46367     | 22                  |
-| 25   | 26        | 75024     | 23                  |
-| 26   | 27        | 121392    | 24                  |
-| 27   | 28        | 196417    | 25                  |
-| 28   | 29        | 317810    | 26                  |
-| 29   | 30        | 514228    | 27                  |
-| 30   | 31        | 832039    | 28                  |
-| 31   | 32        | 1346268   | 29                  |
-| 32   | 33        | 2178308   | 30                  |
-| 33   | 34        | 3524577   | 31                  |
-| 34   | 35        | 5702886   | 32                  |
-| 35   | 36        | 9227464   | 33                  |
-| 36   | 37        | 14930351  | 34                  |
-| 37   | 38        | 24157816  | 35                  |
-| 38   | 39        | 39088168  | 36                  |
-| 39   | 40        | 63245985  | 37                  |
-| 40   | 41        | 102334154 | 38                  |
+| N    | Iterative | Recursive   | Dynamic Programming |
+|------|-----------|-------------|---------------------|
+| 0    | 0         | 0           | 0                   |
+| 1    | 0         | 0           | 0                   |
+| 2    | 2         | 1           | 1                   |
+| 3    | 3         | 2           | 2                   |
+| 4    | 4         | 4           | 3                   |
+| 5    | 5         | 7           | 4                   |
+| 6    | 6         | 12          | 5                   |
+| 7    | 7         | 20          | 6                   |
+| 8    | 8         | 33          | 7                   |
+| 9    | 9         | 54          | 8                   |
+| 10   | 10        | 88          | 9                   |
+| 11   | 11        | 143         | 10                  |
+| 12   | 12        | 232         | 11                  |
+| 13   | 13        | 376         | 12                  |
+| 14   | 14        | 609         | 13                  |
+| 15   | 15        | 986         | 14                  |
+| 16   | 16        | 1596        | 15                  |
+| 17   | 17        | 2583        | 16                  |
+| 18   | 18        | 4180        | 17                  |
+| 19   | 19        | 6764        | 18                  |
+| 20   | 20        | 10945       | 19                  |
+| 21   | 21        | 17710       | 20                  |
+| 22   | 22        | 28656       | 21                  |
+| 23   | 23        | 46367       | 22                  |
+| 24   | 24        | 75024       | 23                  |
+| 25   | 25        | 121392      | 24                  |
+| 26   | 26        | 196417      | 25                  |
+| 27   | 27        | 317810      | 26                  |
+| 28   | 28        | 514228      | 27                  |
+| 29   | 29        | 832039      | 28                  |
+| 30   | 30        | 1346268     | 29                  |
+| 31   | 31        | 2178308     | 30                  |
+| 32   | 32        | 3524577     | 31                  |
+| 33   | 33        | 5702886     | 32                  |
+| 34   | 34        | 9227464     | 33                  |
+| 35   | 35        | 14930351    | 34                  |
+| 36   | 36        | 24157816    | 35                  |
+| 37   | 37        | 39088168    | 36                  |
+| 38   | 38        | 63245985    | 37                  |
+| 39   | 39        | 102334154   | 38                  |
+| 40   | 40        | 165580140   | 39                  |
+| 41   | 41        | 267914295   | 40                  |
+| 42   | 42        | 433494436   | 41                  |
+| 43   | 43        | 701408732   | 42                  |
+| 44   | 44        | 1134903169  | 43                  |
+| 45   | 45        | 1836311902  | 44                  |
 
 The ops table matches the theory. Recursive operations count looks like Fibonacci numbers (aka at
-n=40 ops is close to 102334155), while iterative and DP are linear.
+n=40 ops is somewhat close to 102334155), while iterative and DP are linear.
 
 The results we get also depends on what we count as an operation, meaning where we are incrementing the operations count.
 In the dynamic programming solution, we are not incrementing the operations count when fib(n) is being called for n values
@@ -227,6 +234,11 @@ and the iterative solution grows quicker than the dynamic programming one in Jav
 
 
 ## Language Analysis
+
+I chose Java as my second language as it is another language I am learning right now, and I thought learning 
+more about both languages would be more beneficial to me instead of confusing myself by adding on another one at the same time. 
+Also, Java itself revolves around object-oriented programming, which doesn't exist in C, so it would be interesting 
+to see if there are any differences in algorithm implementation because of that factor. 
 
 ### Language 1: C
 
@@ -288,10 +300,17 @@ The data matched theory - exponential growth for recursion and linear for iterat
 C was faster in my measurements (after O3 -march=native), while Java improved after JVM warm-up.
 
 If I were to redo this, I’d drive both languages from one runner, as that ensures that the timings are being calculated the same way
-and enables more accurate results. 
+and enables more accurate results. If I had more time, I would also have made sure that the code in runner.c and main.c,
+accounted for all invalid user inputs. I accounted for some, but if the user inputs a number higher than 4 or less than 1
+for which approach they choose, the program would have a runtime error.
+I also would go back and perhaps look-up more ways this algorithm could be solved.
+I wrote the code all myself, as I believed this was best for my practice and thinking skills.
 
 As a side effect of this assignment, I also learned a few other things, such as what nanoseconds are, what 1e6/1e9 means, and more details about how different languages are compiled and interpreted. 
-Also, I initially gave each function two jobs (fill array and return fib of n), but having a function focused on one purpose makes timing cleaner and I refactored.
+A note I would like to add is that I initially gave each function two jobs (fill array and return fib of n), but having a function focused on one purpose makes timing cleaner and I refactored.
+fibArray.c is written separately in order to print out an array of fibs from 1 to N. 
+
+
 
 ## References
 
@@ -301,6 +320,7 @@ Function pointers in C. Tutorialspoint. (n.d.-a). https://www.tutorialspoint.com
 kartik. (2025, July 23). Nth Fibonacci number. GeeksforGeeks. https://www.geeksforgeeks.org/dsa/program-for-nth-fibonacci-number/ https://www.geeksforgeeks.org/java/compilation-execution-java-program/ \
 Westrelin, R. (2022, August 26). How the JIT compiler boosts Java performance in openjdk. Red Hat Developer. https://developers.redhat.com/articles/2021/06/23/how-jit-compiler-boosts-java-performance-openjdk?utm_source=chatgpt.com#hotspot_s_jit_execution_model \
 Clock_gettime(3) - linux manual page. (n.d.). https://man7.org/linux/man-pages/man3/clock_gettime.3.html \
+Kantan Coding. (2021, February 27). Big O Notation Series #7: Time Complexity Visualization of Recursive Fibonacci. YouTube. https://www.youtube.com/watch?v=AQp1OG7aSwg \
 
 
 
