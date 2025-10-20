@@ -3,9 +3,9 @@
 #include <time.h>
 
 //print every element ofthe array separated by a space
-void printIntArray(int* array, int size){
+void printIntArray(uint64_t* array, int size){
     for (int i = 0; i < size; i++){
-        printf("%d ", array[i]);
+        printf("%llu ", array[i]);
     }
     printf("\n");
 }

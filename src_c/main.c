@@ -10,7 +10,7 @@ int main(int argc, char** argv){
     //if user enters less than 4 args, prompt them and return 1 so that main reruns
     if (argc < 4){
         printf("Welcome to our fibonacci assignment! Please enter in these arguments one after the other: \n");
-        printf("1. Number for the size of array.\n");
+        printf("1. Number for n.\n");
         printf("2. The number 1 to run the iterative approach, 2 for recursive, 3 for recursive with dynamic programming, and 4 for all.\n");
         printf("3. Enter 1 to print, and 0 to not print.\n");
         return 1;
