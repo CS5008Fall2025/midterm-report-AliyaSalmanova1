@@ -4,7 +4,7 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
 public class Tests {
-
+    //initialize FibonacciApproach objects
     FibonacciApproach fibIterative;
     FibonacciApproach fibRecursive;
     FibonacciApproach fibDynamicProgramming;
@@ -28,7 +28,8 @@ public class Tests {
         assertEquals(1, fibRecursive.fibonacci(1));
         assertEquals(832040, fibRecursive.fibonacci(30));
     }
-
+    
+    //dp has separate test because object has to be instantiated with a different n before each test
     @Test
     public void testDP1(){
         fibDynamicProgramming = new FibonacciDP(0);

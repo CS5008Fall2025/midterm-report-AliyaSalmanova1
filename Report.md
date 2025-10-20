@@ -24,7 +24,7 @@ for 0...N to csv files, and I used this data to create line graphs that are in t
 
 Pseudocode:
 ```
-function fib_iter(n):
+function fib(n):
     if n <= 1: return n
     prev = 0
     curr = 1
@@ -47,9 +47,9 @@ The space complexity is O(1), as no matter how large or small n is, we always de
 Pseudocode:
 
 ```
-function fib_rec(n):
+function fib(n):
     if n <= 1: return n
-    return fib_rec(n-1) + fib_rec(n-2)
+    return fib(n-1) + fib(n-2)
 ```
 
 Let's look at this using the recurrence tree if n is 4: 
@@ -81,12 +81,12 @@ We never go over 4 functions on the call stack.
 Pseudocode:
 
 ```
-memo = array of length n+1 filled with 0s
-function fib_memo(n):
+cache = array of length n+1 filled with 0s
+function fib(n):
     if n <= 1: return n
-    if memo[n] != 0: return memo[n]
-    memo[n] = fib_memo(n-1) + fib_memo(n-2)
-    return memo[n]
+    if cache[n] != 0: return cache[n]
+    cache[n] = fib(n-1) + fib(n-2)
+    return cache[n]
 ```
 
 To show what is happening better I will draw out a tree:
